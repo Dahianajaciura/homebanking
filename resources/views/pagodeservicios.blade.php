@@ -25,32 +25,29 @@
     <div class="container">
       <div class="row">
         <div class="col-md-4 offset-md-4">
-          <form>
+          <form action="{{action('PagoDeServiciosController@pagoDeServicios')}}" method='post'>
             <div class="form-group">
               <label for="exampleInputEmail1">Nombre del Servicio</label>
-              <input type="nombredelservicio" id="nombredelservicio" class="form-control" />
+              <input type="nombredelservicio" id="nombre" name='nombre' class="form-control" />
             </div>
             <div class="form-group">
               <label for="exampleInputPassword1">Numero de referencia</label>
-              <input type="number" id="referencia" class="form-control" />
+              <input type="number" id="referencia" name='referencia' class="form-control" />
             </div>
             <div class="form-group">
               <label for="exampleInputPassword1">Importe</label>
-              <input type="number" id="importe" class="form-control" />
+              <input type="number" id="importe" name='importe' class="form-control" />
             </div>
-            <button
-           
-              type="button"
-              class="btn btn-info"
-              data-toggle="modal" data-target="#exampleModal"
-            >
-              Pagar Servicio
-            </button>
+      
+            <input type="submit" class="btn btn-info" value="Pagar Servicio">
           </form>
         </div>
       </div>
     </div>
-    <div
+
+
+    <!-- 
+   <div
       class="modal fade"
       id="exampleModal"
       tabindex="-1"
@@ -84,7 +81,7 @@
             <button type="button" class="btn btn-danger">no, mejor luego</button>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
 
   

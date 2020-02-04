@@ -13,35 +13,32 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Balance</title>
   </head>
-  
-
-
-<body class="d-flex flex-column h-100">
-
- 
+    <body class="d-flex flex-column h-100">
     <div class="jumbotron" id='balance'>
-      <h1><b>Balance Financiero</b></h1>
+      <h3><b>Balance Financiero</b></h>
       <div>Aca podes controlar los movimientos de tu cuenta</div>
     </div>
 
-<div class="container">
-    <table class="table">
+    <div class="container">
+      <div class="alert alert-info" role="alert" style="margin-left: 5px;">
+        <strong>Saldo ${{ $salario ?? '' }}</strong>
+      </div>
+    <table class="table text-center table-hover">
       <thead>
         <tr>
           <th scope="col">Fecha</th>
           <th scope="col">Descripcion</th>
           <th scope="col">Importe</th>
-          <th scope="col">Saldo</th>
+          <!-- <th scope="col">Saldo</th> -->
         </tr>
       </thead>
       <tbody>
       @foreach ($balance as $item)
-	<tr>
-		<td>{{$item->fecha}}</td>
-	    <td>{{$item->desc}}</td>
-      <td>{{$item->importe}}</td>
-      <td>{{$item->Saldo}}</td>
-	</tr>
+      <tr>
+                <th scope="row">{{ date('d-m-Y', strtotime($item->fecha))  }}</th>
+                <td>{{ $item->desc }}</td>
+                <td>{{ $item->importe }}</td>
+            </tr>
 @endforeach
        
       </tbody>

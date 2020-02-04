@@ -17,53 +17,39 @@
 
   <body class="d-flex flex-column h-100">
     <div class="jumbotron">
-      <h1><b>Inversiones</b></h1>
+      <h3><b>Inversiones</b></h3>
       <div>Duplica tus ahorros en el mercado financiero</div>
     </div>
     <div class="container">
-      <div class="row">
-        <div class="col">
-          <div class="table-responsive ">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th scope="col">Empresa</th>
-                  <th scope="col">Acciones</th>
-                  <th scope="col">Valor de accion</th>
-                  <th scope="col">Compraventa de Accion</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">Arcos Dorados</th>
-                  <td>1000</td>
-                  <td>100</td>
-                  <td>
-                    <button
-                      type="button"
-                      class="btn btn-primary"
-                      data-toggle="modal"
-                      data-target="#comprar"
-                    >
-                      Comprar
-                    </button>
-                    <button
-                      type="button"
-                      class="btn btn-success"
-                      data-toggle="modal"
-                      data-target="#vender"
-                    >
-                      Vender
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div
+  <div class="alert alert-primary" role="alert" style="margin-left: 5px;">
+  <strong>Saldo ${{ $salario }}</strong>
+  </div>
+    <table class="table text-center table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Empresa</th>
+          <th scope="col">Acciones</th>
+          <th scope="col">Valor de accion</th>
+          <th scope="col">Compra / venta de acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+
+      @foreach ($inversiones as $inv)
+        <tr>
+          <td>{{$inv->empresa}}</td>
+          <td>{{$inv->acciones}} / {{$inv->total}}</td>
+          <td>{{$inv->valor}}</td>
+          <td class="text-center">
+            <a href="{{ route('inversiones.comprar', ['id' => $inv->id]) }}" class="btn btn-primary">Comprar</a>
+            <a href="{{ route('inversiones.vender', ['id' => $inv->id]) }}" class="btn btn-success">Vender</a>
+          </td>
+        </tr>
+      @endforeach
+      </tbody>
+    </table>
+
+  <!--   <div
       class="modal fade"
       id="comprar"
       tabindex="-1"
@@ -154,7 +140,7 @@
         </div>
       </div>
     </div>
-    
+     -->
   
   </body>
 </html>
