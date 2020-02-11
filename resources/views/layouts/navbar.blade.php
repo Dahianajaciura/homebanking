@@ -7,6 +7,7 @@
           <a class="navbar-brand " href="{{ url('/')}}">Home Banking</a>
           <ul class="navbar-nav mr-auto">
             <!--       class active resalta la opción seleccionada -->
+            
             <li class="nav-item @if(!(empty($opcionIndex))) {{$opcionIndex}} @endif">
               <a class="nav-link" href="{{ url('/')}}">Home</a>
             </li>

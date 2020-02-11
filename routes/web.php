@@ -11,7 +11,7 @@ Route::get('/inversiones', 'InversionesController@index');
 Route::post("/pagodeservicios",
 "HomeController@payService")->name("pagodeservicios");
 
-Route::post("/pagodeservicios/pago","PagoDeServiciosController@pagoDeServicios");
+Route::post("/pagodeservicios","PagoDeServiciosController@pagoDeServicios");
 
 
 Route::get('inversiones', 'InversionesController@index')->name('inversiones');

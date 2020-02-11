@@ -1,0 +1,95 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    text-align: center;
+}
+
+header{
+    border-bottom: 2px solid grey;
+    padding: 20px 0px;
+    margin-bottom: 10px;
+    width: 100%;
+    text-align: center;
+}
+
+header a{
+   text-decoration: none;
+   color: black;
+}
+
+header a:hover{
+    text-decoration: none;
+    color: black;
+ }
+
+#contenedor{
+background-color: darkcyan;
+padding:100px;
+}
+
+#contenedorLog a{
+    text-decoration: none;
+    color: black;
+    text-align: center;
+}
+
+#contenedor a{
+    color:white;
+    text-decoration: none;
+    font-size: 20px;
+
+}
+
+h1{
+    font-size: 50px;
+    color:white;
+    text-align: center;
+}
+
+h2{
+    font-size: 25px;
+}
+
+#contenedorDatos{
+    background-color: grey;
+    padding: 15px;
+    text-align: center;
+  
+}
+
+
+#contenedorDatos a{
+   color: white;
+  text-decoration: none;
+}
+
+#contenedorDatos h1{
+   color: white;
+  
+}
+
+#formulariosesion{
+outline: none;
+text-align: center;
+padding: 20px;
+display: block;
+width: 300px;
+border-radius: 3px;
+margin: 20px auto;
+width: 320px;
+}
+
+#formulariosesion input[type="submit"] {
+cursor: pointer;
+width: 320px;
+ }
+
+#formulariosesion input[type="submit"]:hover {
+background-color: rgb(5, 106, 106);
+ }
+     
+ 
+ #formulariosesion input[type="text"],input[type="password"]{
+    width: 320px; 
+ }

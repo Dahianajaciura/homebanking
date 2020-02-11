@@ -15,7 +15,7 @@
   </head>
     <body class="d-flex flex-column h-100">
     <div class="jumbotron" id='balance'>
-      <h3><b>Balance Financiero</b></h>
+      <h3><b>Balance Financiero</b></h3>
       <div>Aca podes controlar los movimientos de tu cuenta</div>
     </div>
 
