@@ -15,9 +15,8 @@ class CrearTablaInversiones extends Migration
     {
         Schema::create('inversiones', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('Empresa');
-            $table->integer('Acciones');
-            $table->integer('Valor');
+            $table->string('Moneda');
+            $table->float('Valor');
             $table->timestamps();
         });
     }

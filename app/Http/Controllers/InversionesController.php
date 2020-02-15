@@ -10,129 +10,51 @@ class InversionesController extends Controller
 {  
     public function index()
     {
-        $inversiones = Inversiones::all();
-        $salario = $this->getSalario(0);
-
-        foreach($inversiones as $inv){
-            $operacion = rand(1, 3);
-
-            if($operacion == 1){
-                $inv->valor = $inv->valor / 2;
-            } else {
-                $inv->valor = $inv->valor * 2;
-            }
-
-            $inv->save();
-        }
+        $inversiones = inversiones::all();
+        $salario = Balance::obtenerSaldo();
 
         return view('inversiones')->with(['inversiones' => $inversiones, 'salario' => $salario]);
     }
 
-    public function getSalario($dinero){
-        $balance = Balance::all();
-        $salario = 0;
+    public function comprarAcciones(Request $request) {
+        $salario = Balance::obtenerSaldo();
+        $importe = $request->acciones * inversiones::obtenerValorAccion($request->moneda);
 
-        foreach($balance as $item){
-            $salario += $item->importe;
-        }
+        if ($salario->peso >= $importe) {
+            if ($request->moneda == "Dolar") {            
+                Balance::insert(['fecha' => date("Y-m-d H:i:s"), 'desc' => $request->operacion .": " .$request->moneda, 'importe' => -$importe, 'importe_dolar' => $request->acciones, 'importe_euro' => 0, 'created_at' => date("Y-m-d H:i:s")]);
 
-        $salario -= $dinero;
-
-        return $salario;
-    }
-
-    public function comprar($id){
-        $inv = Inversiones::find($id);
-
-        if($inv->acciones > 0){
-            $salario = $this->getSalario(0);
-
-            if($salario >= $inv->valor){
-                $inv->acciones -= 1;
-                $inv->save();
-
-                $balance = new Balance();
-
-                $balance->fecha = date('Y-m-d');
-                $balance->desc = "Compra de Accion: " . $inv->empresa;
-                $balance->importe = $inv->valor * -1;
-                $balance->save();
-
-                Session::flash('payMsg', 'Se compro una accion de la empresa ' . strtoupper($inv->empresa));
-                Session::flash('alertClass', 'alert-primary');
+                return response()->json(["message" => "<div class='alert-success' role='alert' style='color:#333333; text-align:center; padding:10px;'>La Compra de Dólares se ha realizado con éxito!</div>"]);
             } else {
+                Balance::insert(['fecha' => date("Y-m-d H:i:s"), 'desc' => $request->operacion .": " .$request->moneda, 'importe' => -$importe, 'importe_dolar' => 0, 'importe_euro' => $request->acciones, 'created_at' => date("Y-m-d H:i:s")]);
 
-                Session::flash('payMsg','No tienes suficiente dinero en la cuenta!');
-                Session::flash('alertClass','alert-danger');
+                return response()->json(["message" => "<div class='alert-success' role='alert' style='color:#333333; text-align:center; padding:10px;'>La Compra de Euros se ha realizado con éxito!</div>"]);
             }
         } else {
-
-            Session::flash('payMsg','No hay acciones para comprar!');
-            Session::flash('alertClass','alert-danger');
+           return response()->json(["message" => "<div class='alert-danger' role='alert' style='color:#333333; text-align:center; padding:10px;'>No tienes saldo suficiente para Comprar!</div>"]);  
         }
-        return redirect()->route('inversiones');
     }
 
-    public function vender($id){
-        $inv = Inversiones::find($id);
+    public function venderAcciones(Request $request) {
+        $saldo = Balance::obtenerSaldo();
+        $importe = $request->acciones * inversiones::obtenerValorAccion($request->moneda);
 
-        if($inv->acciones > 0){
-            if($inv->acciones >= $inv->total){
-               Session::flash('payMsg','No tenes acciones compradas!');
-               Session::flash('alertClass','alert-danger');
-            }
+        if ($request->moneda == "Dolar") {
+            if ($request->acciones <= $saldo->dolar) {
+                Balance::insert(['fecha' => date("Y-m-d H:i:s"), 'desc' => $request->operacion .": " .$request->moneda, 'importe' => $importe, 'importe_dolar' => -$request->acciones, 'importe_euro' => 0, 'created_at' => date("Y-m-d H:i:s")]);
 
-            $salario = $this->getSalario($inv->valor);
-
-            if($salario >= 0){
-                $inv->acciones += 1;
-                $inv->save();
-
-                $balance = new Balance();
-
-                $balance->fecha = date('Y-m-d');
-                $balance->desc = "Venta de Accion: " . $inv->empresa;
-                $balance->importe = $inv->valor;
-                $balance->save();
-
-
-
-                Session::flash('payMsg',"Se vendio una accion de la empresa " . strtoupper($inv->empresa));
-                Session::flash('alertClass', 'alert-primary');
+                return response()->json(["message" => "<div class='alert-success' role='alert' style='color:#333333; text-align:center; padding:10px;'>La Venta de Dólares se ha realizado con éxito!</div>"]);
             } else {
-
-                Session::flash('payMsg','No tienes suficiente dinero en la cuenta!');
-                Session::flash('alertClass','alert-danger');
+                return response()->json(["message" => "<div class='alert-danger' role='alert' style='color:#333333; text-align:center; padding:10px;'>No tienes suficientes Acciones para Vender!</div>"]);
             }
-
         } else {
+            if ($request->acciones <= $saldo->euro) {
+                Balance::insert(['fecha' => date("Y-m-d H:i:s"), 'desc' => $request->operacion .": " .$request->moneda, 'importe' => $importe, 'importe_dolar' => 0, 'importe_euro' => -$request->acciones, 'created_at' => date("Y-m-d H:i:s")]);
 
-            Session::flash('payMsg','No hay acciones para vender!');
-            Session::flash('alertClass','alert-danger');
+                return response()->json(["message" => "<div class='alert-success' role='alert' style='color:#333333; text-align:center; padding:10px;'>La Venta de Euros se ha realizado con éxito!</div>"]);
+            } else {
+                return response()->json(["message" => "<div class='alert-danger' role='alert' style='color:#333333; text-align:center; padding:10px;'>No tienes suficientes Acciones para Vender!</div>"]);
+            }
         }
-        return redirect()->route('inversiones');
     }
-
 }
-
-/* 
-
-public function index()
-{
-    $inversiones = inversiones::insert(['Empresa' =>'feo',
-    'Acciones' => '22',
-    'Valor'=> '88']);
-
-$inversiones = inversiones::orderBy('id','ASC')->get();                              
-return view('inversiones')->with('inversiones' , $inversiones);
-   //return view ('inversiones');
-}
-
-public function payService (Request $request){
-    $service = $request-> get('service');
-    $money = $request->get('money');
-}
-
-} */
-
-

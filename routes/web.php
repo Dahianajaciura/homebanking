@@ -6,17 +6,14 @@ Route::get('/', 'HomeController@index');
 Route::get('/balance', 'BalanceController@index');
 Route::get('/pagodeservicios', 'PagoDeServiciosController@index');
 Route::get('/inversiones', 'InversionesController@index');
+Route::get('/login', 'LoginController@index');
 
-
-Route::post("/pagodeservicios",
-"HomeController@payService")->name("pagodeservicios");
-
-Route::post("/pagodeservicios","PagoDeServiciosController@pagoDeServicios");
-
+Route::post("/pagodeservicios/pago","PagoDeServiciosController@pagoDeServicios");
+Route::post("/inversiones","InversionesController@inversiones");
 
 Route::get('inversiones', 'InversionesController@index')->name('inversiones');
-Route::get('inversiones/comprar/{id}', 'InversionesController@comprar')->name('inversiones.comprar');
-Route::get('inversiones/vender/{id}', 'InversionesController@vender')->name('inversiones.vender');
+Route::post('/inversiones/comprar', 'InversionesController@comprarAcciones');
+Route::post('/inversiones/vender', 'InversionesController@venderAcciones');
 
 
 ?>
