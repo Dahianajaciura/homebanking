@@ -22,8 +22,8 @@
     <div class="jumbotron">
       <div class="container">
         <h1 class="display-5">Bienvenido a <b>DJ</b>Banking, que querés hacer hoy?</h1>
-        En este sitio poder operar con tu cuenta mirando el balance, haciendo
-        transferencias, pagando servicios y armando inversiones!
+        En este sitio poder operar con tu cuenta mirando tu <b>balance</b>, haciendo
+        transferencias,<b> pagando servicios</b> y armando <b>inversiones</b>!
       </div>
     </div>
     <div class="container">
@@ -67,7 +67,15 @@
       </div>
     </div>
 
-   
+    <footer background-color>
+      <div style="text-align: center;">
+        <div class="allrights"> 
+	    		<strong>
+	        	© 2020 Djaciura - Todos los derechos reservados
+	    		</strong> 
+	    	</div>
+      </div>  
+    </footer>
   </body>
 </html>
 @endsection

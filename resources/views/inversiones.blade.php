@@ -21,8 +21,8 @@
       <div>Duplica tus ahorros en el mercado financiero</div>
     </div>
     <div class="container">
-  <div class="alert alert-primary" role="alert" style="margin-left: 5px;">
-  <strong>Saldo ${{ $salario->peso }} Saldo en Dolar ${{ $salario->dolar }} Saldo en Euro ${{ $salario->euro }}</strong>
+  <div class="alert alert-secondary" role="alert" style="margin-left: 5px;">
+  <strong>Saldo en Pesos ${{ $salario->peso }} <br> Saldo en Dolar ${{ $salario->dolar }}<br> Saldo en Euro ${{ $salario->euro }}</strong>
   </div>
   <form action="{{action('InversionesController@inversiones')}}" method='post'>
     <table class="table text-center table-hover">
@@ -77,6 +77,17 @@
     </div>
   </div>
 </div>
+<footer background-color>
+      <div style="text-align: center;">
+        <div class="allrights"> 
+	    		<strong>
+	        	© 2020 Djaciura - Todos los derechos reservados
+	    		</strong> 
+	    	</div>
+      </div>  
+    </footer>
+
+</body>
 @endsection
 @section('scripts')
 <script>

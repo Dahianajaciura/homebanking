@@ -22,10 +22,6 @@
       <div>Paga todo lo que necesites desde la comodidad de tu casa</div>
     </div>
 
-
-
-
-
     <div class="container">
       <div class="row">
         <div class="col-md-4 offset-md-4">
@@ -68,7 +64,15 @@ $("#pagarServicio").click(function() {
   });
 });
 </script>
-
+<footer background-color>
+      <div style="text-align: center;">
+        <div class="allrights"> 
+	    		<strong>
+	        	© 2020 Djaciura - Todos los derechos reservados
+	    		</strong> 
+	    	</div>
+      </div>  
+    </footer>
 </body>
 </html>
 @endsection

@@ -10,6 +10,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="estilo.css">
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Balance</title>
   </head>
@@ -21,7 +23,7 @@
 
     <div class="container">
       <div class="alert alert-info" role="alert" style="margin-left: 5px;">
-        <strong>Saldo ${{ $salario ?? '' }}</strong>
+        <strong>Saldo ${{ $salario ?? '' }} </strong>
       </div>
     <table class="table text-center table-hover">
       <thead>
@@ -29,7 +31,7 @@
           <th scope="col">Fecha</th>
           <th scope="col">Descripcion</th>
           <th scope="col">Importe</th>
-          <!-- <th scope="col">Saldo</th> -->
+        
         </tr>
       </thead>
       <tbody>
@@ -42,13 +44,14 @@
 @endforeach
        
       </tbody>
-       
-
-
-    </table>
- 
-
+      </table>
 </div>
+    <footer>
+	    		<strong>
+	        	© 2020 Djaciura - Todos los derechos reservados
+	    		</strong>  
+    </footer>
+
   </body>
 </html>
 @endsection
